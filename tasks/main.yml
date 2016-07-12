@@ -1,0 +1,20 @@
+---
+- name: Install snoopy package
+  tags: snoopy
+  yum: name=snoopy
+       enablerepo=tkimball83-{{ tkimball83_pkg }}
+       state=present
+       update_cache=yes
+  register: snoopy_yum
+
+- name: Configure snoopy logger
+  tags: snoopy
+  template: src={{ item.src }}
+            dest={{ item.dst }}
+            owner=root
+            group=root
+            mode=0644
+  with_items:
+    - { src: snoopy.ini.j2, dst: /etc/snoopy.ini }
+    - { src: ld.so.preload.j2, dst: /etc/ld.so.preload }
+  when: snoopy_yum|success

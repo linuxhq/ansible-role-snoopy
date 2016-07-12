@@ -1,0 +1,2 @@
+---
+snoopy_ld_preload: '/usr/$LIB/libsnoopy.so'

@@ -1,0 +1,17 @@
+---
+dependencies:
+  - tkimball83.tkimball83
+galaxy_info:
+  author: tkimball83
+  description: RHEL/CentOS - Log every executed command to syslog
+  license: BSD
+  min_ansible_version: 2.0
+  platforms:
+    - name: EL
+      versions: 
+        - 6
+        - 7
+  galaxy_tags:
+    - security
+    - snoopy
+    - system
