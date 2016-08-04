@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - tkimball83.tkimball83
+  - linuxhq.linuxhq
 galaxy_info:
   author: tkimball83
   description: RHEL/CentOS - Log every executed command to syslog

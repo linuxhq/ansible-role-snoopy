@@ -2,7 +2,7 @@
 - name: Install snoopy package
   tags: snoopy
   yum: name=snoopy
-       enablerepo=tkimball83-{{ tkimball83_pkg }}
+       enablerepo=linuxhq-{{ linuxhq_pkg }}
        state=present
        update_cache=yes
   register: snoopy_yum
