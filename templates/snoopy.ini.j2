@@ -185,7 +185,7 @@ syslog_facility = {{ snoopy_syslog_facility if snoopy_syslog_facility is defined
 ;
 ; Example:
 ;syslog_ident = "my-ident-string"
-syslog_ident = "{{ snoopy_syslog_ident if snoopy_syslog_ident is defined else 'snoopy' }}
+syslog_ident = "{{ snoopy_syslog_ident if snoopy_syslog_ident is defined else 'snoopy' }}"
 
 
 
