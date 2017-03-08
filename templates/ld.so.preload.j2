@@ -1,1 +1,1 @@
-{{ snoopy_ld_preload | default('/usr/$LIB/libsnoopy.so') }}
+{{ snoopy_ld_preload if snoopy_ld_preload is defined else '/usr/$LIB/libsnoopy.so' }}

@@ -1,20 +1,23 @@
 ---
-- name: Install snoopy package
+- name: Ensure the snoopy package is installed
   tags: snoopy
-  yum: name=snoopy
-       enablerepo=linuxhq-{{ linuxhq_pkg }}
-       state=present
-       update_cache=yes
+  yum:
+    enablerepo: "linuxhq-{{ linuxhq_pkg }}"
+    name: snoopy
+    state: present
+    update_cache: yes
   register: snoopy_yum
 
-- name: Configure snoopy logger
+- name: Applying snoopy configuration
   tags: snoopy
-  template: src={{ item.src }}
-            dest={{ item.dst }}
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dst }}"
+    owner: root
+    group: root
+    mode: 0644
   with_items:
     - { src: snoopy.ini.j2, dst: /etc/snoopy.ini }
     - { src: ld.so.preload.j2, dst: /etc/ld.so.preload }
   when: snoopy_yum|success
+...

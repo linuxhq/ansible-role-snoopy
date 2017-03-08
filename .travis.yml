@@ -6,8 +6,9 @@ install:
   - pip install ansible
   - ansible --version
   - printf '[defaults]\nroles_path=../' > ansible.cfg
-  - ansible-galaxy install linuxhq.linuxhq
 script:
+  - ansible-galaxy install linuxhq.linuxhq
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+...

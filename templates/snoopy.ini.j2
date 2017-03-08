@@ -61,6 +61,8 @@
 ;message_format = "uid=%{uid} tty=%{tty} cmdline=%{cmdline}"   ; <--- logs uid + tty + command that is executed
 {% if snoopy_message_format is defined %}
 message_format = "[{{ snoopy_message_format|join(' ') }}]: %{cmdline}"
+{% else %}
+message_format = "[uid:%{uid} sid:%{sid} tty:%{tty} cwd:%{cwd} filename:%{filename}]: %{cmdline}"
 {% endif %}
 
 
@@ -96,14 +98,10 @@ message_format = "[{{ snoopy_message_format|join(' ') }}]: %{cmdline}"
 ;   "" (empty string)
 ;
 ; Examples:
-{% if snoopy_filter_chain is defined %}
-filter_chain = "{{ snoopy_filter_chain|join(';') }}"
-{% else %}
-;filter_chain = ""
-{% endif %}
 ;filter_chain = "only_uid:0"
 ;filter_chain = "only_uid:10000"
 ;filter_chain = "exclude_uid:0"
+filter_chain = "{{ snoopy_filter_chain|join(';') if snoopy_filter_chain is defined else '' }}"
 
 
 
@@ -137,13 +135,10 @@ filter_chain = "{{ snoopy_filter_chain|join(';') }}"
 ;
 ; Example:
 ;output = console
-{% if snoopy_output is defined %}
-output = {{ snoopy_output }}
-{% else %}
 ;output = devlog
-{% endif %}
 ;output = file:/var/log/snoopy.log
 ;output = socket:/var/run/socket-for-snoopy.sock
+output = {{ snoopy_output if snoopy_output is defined else 'devlog' }}
 
 
 
@@ -160,15 +155,8 @@ output = {{ snoopy_output }}
 ;   no (unless changed by ./configure --enable-error-logging to yes)
 ;
 ; Example:
-{% if snoopy_error_logging is defined %}
-{%   if snoopy_error_logging %}
-error_logging = yes
-{%   else %}
-error_logging = no
-{%   endif %}
-{% else %}
 ;error_logging = yes
-{% endif %}
+error_logging = {{ 'yes' if snoopy_error_logging is defined and snoopy_error_logging else 'no' }}
 
 
 
@@ -183,11 +171,8 @@ error_logging = no
 ;   LOG_AUTHPRIV (unless changed by ./configure --with-syslog-facility=FACILITY)
 ;
 ; Example:
-{% if snoopy_syslog_facility is defined %}
-syslog_facility = {{ snoopy_syslog_facility }}
-{% else %}
 ;syslog_facility = LOG_AUTHPRIV
-{% endif %}
+syslog_facility = {{ snoopy_syslog_facility if snoopy_syslog_facility is defined else 'LOG_AUTHPRIV' }}
 
 
 
@@ -202,11 +187,8 @@ syslog_facility = {{ snoopy_syslog_facility }}
 ;   "snoopy" (unless changed by ./configure --with-syslog-ident="other")
 ;
 ; Example:
-{% if snoopy_syslog_ident is defined %}
-syslog_ident = "{{ snoopy_syslog_ident }}"
-{% else %}
 ;syslog_ident = "my-ident-string"
-{% endif %}
+syslog_ident = "{{ snoopy_syslog_ident if snoopy_syslog_ident is defined else 'snoopy' }}
 
 
 
@@ -221,8 +203,5 @@ syslog_ident = "{{ snoopy_syslog_ident }}"
 ;   LOG_INFO (unless changed by ./configure --with-syslog-level=LEVEL)
 ;
 ; Example:
-{% if snoopy_syslog_level is defined %}
-syslog_level = {{ snoopy_syslog_level }}
-{% else %}
 ;syslog_level = LOG_INFO
-{% endif %}
+syslog_level = {{ snoopy_syslog_level if snoopy_syslog_level is defined else 'LOG_INFO' }}
