@@ -59,11 +59,7 @@
 ;message_format = "useless static log entry that gets logged on every program execution"
 ;message_format = "uid=%{uid}"   ; <--- this would only log uids who execute programs, nothing else;
 ;message_format = "uid=%{uid} tty=%{tty} cmdline=%{cmdline}"   ; <--- logs uid + tty + command that is executed
-{% if snoopy_message_format is defined %}
 message_format = "[{{ snoopy_message_format|join(' ') }}]: %{cmdline}"
-{% else %}
-message_format = "[uid:%{uid} sid:%{sid} tty:%{tty} cwd:%{cwd} filename:%{filename}]: %{cmdline}"
-{% endif %}
 
 
 
