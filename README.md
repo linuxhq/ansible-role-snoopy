@@ -15,19 +15,16 @@ Available variables are listed below, along with default values:
     snoopy_error_logging: False
     snoopy_filter_chain: ''
     snoopy_ld_preload: '/usr/$LIB/libsnoopy.so'
-    snoopy_output: devlog
-    snoopy_syslog_facility: LOG_AUTHPRIV
-    snoopy_syslog_ident: snoopy
-    snoopy_syslog_level: LOG_INFO
-
-Additional variables available, not defined by default:
-
     snoopy_message_format:
       - uid:%{uid}
       - sid:%{sid}
       - tty:%{tty}
       - cwd:%{cwd}
       - filename:%{filename}
+    snoopy_output: devlog
+    snoopy_syslog_facility: LOG_AUTHPRIV
+    snoopy_syslog_ident: snoopy
+    snoopy_syslog_level: LOG_INFO
 
 ## Dependencies
 

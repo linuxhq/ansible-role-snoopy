@@ -1,2 +1,8 @@
 ---
+snoopy_message_format:
+  - uid:%{uid}
+  - sid:%{sid}
+  - tty:%{tty}
+  - cwd:%{cwd}
+  - filename:%{filename}
 ...
