@@ -98,7 +98,7 @@ message_format = "[{{ snoopy_message_format|join(' ') }}]: %{cmdline}"
 ;filter_chain = "only_uid:0"
 ;filter_chain = "only_uid:10000"
 ;filter_chain = "exclude_uid:0"
-filter_chain = "{{ snoopy_filter_chain }}"
+filter_chain = "{{ snoopy_filter_chain|join(';') }}"
 
 
 

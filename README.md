@@ -13,7 +13,7 @@ None
 Available variables are listed below, along with default values:
 
     snoopy_error_logging: False
-    snoopy_filter_chain: ''
+    snoopy_filter_chain: []
     snoopy_ld_preload: '/usr/$LIB/libsnoopy.so'
     snoopy_message_format:
       - uid:%{uid}
