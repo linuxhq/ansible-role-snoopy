@@ -98,7 +98,7 @@ message_format = "[{{ snoopy_message_format|join(' ') }}]: %{cmdline}"
 ;filter_chain = "only_uid:0"
 ;filter_chain = "only_uid:10000"
 ;filter_chain = "exclude_uid:0"
-filter_chain = "{{ snoopy_filter_chain|join(';') if snoopy_filter_chain is defined else '' }}"
+filter_chain = "{{ snoopy_filter_chain }}"
 
 
 
@@ -135,7 +135,7 @@ filter_chain = "{{ snoopy_filter_chain|join(';') if snoopy_filter_chain is defin
 ;output = devlog
 ;output = file:/var/log/snoopy.log
 ;output = socket:/var/run/socket-for-snoopy.sock
-output = {{ snoopy_output if snoopy_output is defined else 'devlog' }}
+output = {{ snoopy_output }}
 
 
 
@@ -169,7 +169,7 @@ error_logging = {{ 'yes' if snoopy_error_logging is defined and snoopy_error_log
 ;
 ; Example:
 ;syslog_facility = LOG_AUTHPRIV
-syslog_facility = {{ snoopy_syslog_facility if snoopy_syslog_facility is defined else 'LOG_AUTHPRIV' }}
+syslog_facility = {{ snoopy_syslog_facility }}
 
 
 
@@ -185,7 +185,7 @@ syslog_facility = {{ snoopy_syslog_facility if snoopy_syslog_facility is defined
 ;
 ; Example:
 ;syslog_ident = "my-ident-string"
-syslog_ident = "{{ snoopy_syslog_ident if snoopy_syslog_ident is defined else 'snoopy' }}"
+syslog_ident = "{{ snoopy_syslog_ident }}"
 
 
 
@@ -201,4 +201,4 @@ syslog_ident = "{{ snoopy_syslog_ident if snoopy_syslog_ident is defined else 's
 ;
 ; Example:
 ;syslog_level = LOG_INFO
-syslog_level = {{ snoopy_syslog_level if snoopy_syslog_level is defined else 'LOG_INFO' }}
+syslog_level = {{ snoopy_syslog_level }}

@@ -4,8 +4,8 @@ dependencies:
 galaxy_info:
   author: tkimball83
   description: RHEL/CentOS - Log every executed command to syslog
-  license: BSD
-  min_ansible_version: 2.0
+  license: GPLv3
+  min_ansible_version: 2.4
   platforms:
     - name: EL
       versions:

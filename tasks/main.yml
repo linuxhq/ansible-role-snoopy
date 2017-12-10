@@ -1,15 +1,17 @@
 ---
-- name: Ensure the snoopy package is installed
+- name: Ensure that the snoopy package is installed
   tags: snoopy
+  become: true
   yum:
+    disable_gpg_check: yes
     enablerepo: "linuxhq-{{ linuxhq_pkg }}"
     name: snoopy
     state: present
-    update_cache: yes
   register: snoopy_yum
 
 - name: Applying snoopy configuration
   tags: snoopy
+  become: true
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dst }}"
