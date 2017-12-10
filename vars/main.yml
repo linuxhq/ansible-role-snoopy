@@ -1,5 +1,3 @@
 ---
-linuxhq_enabled: True
-linuxhq_gpgcheck: False
 linuxhq_pkg: snoopy
 ...
