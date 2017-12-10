@@ -3,7 +3,6 @@
   tags: snoopy
   become: true
   yum:
-    disable_gpg_check: yes
     enablerepo: "linuxhq-{{ linuxhq_pkg }}"
     name: snoopy
     state: present
