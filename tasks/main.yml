@@ -8,7 +8,7 @@
     state: present
   register: snoopy_yum
 
-- name: Applying snoopy configuration
+- name: Attempting to overlay snoopy configurations
   tags: snoopy
   become: true
   template:
@@ -20,5 +20,5 @@
   with_items:
     - { src: snoopy.ini.j2, dst: /etc/snoopy.ini }
     - { src: ld.so.preload.j2, dst: /etc/ld.so.preload }
-  when: snoopy_yum|success
+  when: snoopy_yum is success
 ...

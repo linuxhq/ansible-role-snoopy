@@ -1,6 +1,8 @@
 # ansible-role-snoopy
 
 [![Build Status](https://travis-ci.org/linuxhq/ansible-role-snoopy.svg?branch=master)](https://travis-ci.org/linuxhq/ansible-role-snoopy)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-snoopy-blue.svg?style=flat)](https://galaxy.ansible.com/linuxhq/snoopy)
+[![License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat)](COPYING)
 
 RHEL/CentOS - Log every executed command to syslog
 
@@ -12,7 +14,7 @@ None
 
 Available variables are listed below, along with default values:
 
-    snoopy_error_logging: False
+    snoopy_error_logging: false
     snoopy_filter_chain: []
     snoopy_ld_preload: '/usr/$LIB/libsnoopy.so'
     snoopy_message_format:
@@ -41,18 +43,19 @@ Available variables are listed below, along with default values:
             - tty:%{tty}
             - cwd:%{cwd}
 
-## Partners
-
-[![packagecloud](http://dka575ofm4ao0.cloudfront.net/pages-transactional_logos/retina/10543/gKme3F4XRaC5EyKJzKsA)](https://packagecloud.io)
-
-Do you need trustworthy hosted package repositories?  Then packagecloud is for you.
-
-A big thank you to packagecloud for supporting the open source community!
-
 ## License
 
-GPLv3
+Copyright (C) 2018 Taylor Kimball <tkimball@linuxhq.org>
 
-## Author Information
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-This role was created by [Taylor Kimball](http://www.linuxhq.org).
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
