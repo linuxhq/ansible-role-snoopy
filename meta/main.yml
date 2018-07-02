@@ -2,6 +2,7 @@
 dependencies:
   - linuxhq.linuxhq
 galaxy_info:
+  role_name: snoopy
   author: tkimball83
   description: RHEL/CentOS - Log every executed command to syslog
   license: GPLv3
