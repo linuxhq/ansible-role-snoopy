@@ -6,7 +6,6 @@
     enablerepo: "linuxhq-{{ linuxhq_pkg }}"
     name: snoopy
     state: present
-  register: snoopy_yum
 
 - name: Attempting to overlay snoopy configurations
   tags: snoopy
@@ -17,8 +16,9 @@
     owner: root
     group: root
     mode: 0644
-  with_items:
+  loop:
     - { src: snoopy.ini.j2, dst: /etc/snoopy.ini }
     - { src: ld.so.preload.j2, dst: /etc/ld.so.preload }
-  when: snoopy_yum is success
+  loop_control:
+    label: "{{ item.dst.split('/')[2] }}"
 ...
