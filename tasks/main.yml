@@ -1,11 +1,22 @@
 ---
-- name: Ensure that the snoopy package is installed
-  tags: snoopy
-  become: true
-  yum:
-    enablerepo: "linuxhq-{{ linuxhq_pkg }}"
-    name: snoopy
-    state: present
+- name: Download install script
+  ansible.builtin.get_url: 
+    url: https://github.com/a2o/snoopy/raw/install/install/install-snoopy.sh
+    dest: /tmp/install-snoopy.sh
+    force: yes
+  delegate_to: localhost
+  run_once: true
+
+- name: Chek if snoopy is already installed
+  ansible.builtin.stat:
+    path: /usr/local/sbin/snoopy-enable
+  register: snoopyfiles
+
+- name: Run install script
+  ansible.builtin.script:
+    cmd: /tmp/install-snoopy.sh stable
+  when: 
+    - snoopyfiles.stat.exists == false
 
 - name: Attempting to overlay snoopy configurations
   tags: snoopy

@@ -1,6 +1,4 @@
 ---
-dependencies:
-  - linuxhq.linuxhq
 galaxy_info:
   role_name: snoopy
   author: tkimball83
