@@ -1,31 +1,32 @@
 ---
-- name: Create temporary file
-  tempfile:
-  register: tempfile
-
-- name: Download install script
-  get_url: 
-    url: https://github.com/a2o/snoopy/raw/install/install/install-snoopy.sh
-    dest: "{{ tempfile.path }}"
-    force: yes
-    mode: 0700
-
-- name: Chek if snoopy is already installed
+- name: Check if snoopy is already installed
   stat:
     path: /usr/local/sbin/snoopy-enable
   register: snoopyfiles
 
-- name: Run install script
-  shell:
-    cmd: '"{{ tempfile.path }}" stable'
+- block:
+    - name: Create temporary file
+      tempfile:
+      register: tempfile
+
+    - name: Download install script
+      get_url: 
+        url: https://github.com/a2o/snoopy/raw/install/install/install-snoopy.sh
+        dest: "{{ tempfile.path }}"
+        force: yes
+        mode: 0700
+
+    - name: Run install script
+      shell:
+        cmd: '"{{ tempfile.path }}" stable'
+    
+    - name: Remove temporary file
+      file:
+        path: "{{ tempfile.path }}"
+        state: absent
   when: 
     - snoopyfiles.stat.exists == false
 
-- name: Remove temporary file
-  file:
-    path: "{{ tempfile.path }}"
-    state: absent
-  when: tempfile.path is defined
 
 - name: Attempting to overlay snoopy configurations
   tags: snoopy
