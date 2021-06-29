@@ -1,22 +1,31 @@
 ---
+- name: Create temporary file
+  tempfile:
+  register: tempfile
+
 - name: Download install script
-  ansible.builtin.get_url: 
+  get_url: 
     url: https://github.com/a2o/snoopy/raw/install/install/install-snoopy.sh
-    dest: /tmp/install-snoopy.sh
+    dest: "{{ tempfile.path }}"
     force: yes
-  delegate_to: localhost
-  run_once: true
+    mode: 0700
 
 - name: Chek if snoopy is already installed
-  ansible.builtin.stat:
+  stat:
     path: /usr/local/sbin/snoopy-enable
   register: snoopyfiles
 
 - name: Run install script
-  ansible.builtin.script:
-    cmd: /tmp/install-snoopy.sh stable
+  shell:
+    cmd: '"{{ tempfile.path }}" stable'
   when: 
     - snoopyfiles.stat.exists == false
+
+- name: Remove temporary file
+  file:
+    path: "{{ tempfile.path }}"
+    state: absent
+  when: tempfile.path is defined
 
 - name: Attempting to overlay snoopy configurations
   tags: snoopy
