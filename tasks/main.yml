@@ -1,15 +1,21 @@
 ---
 - name: Check if snoopy is already installed
+  tags: snoopy
+  become: true
   stat:
     path: /usr/local/sbin/snoopy-enable
   register: snoopyfiles
 
 - block:
     - name: Create temporary file
+      tags: snoopy
+      become: true
       tempfile:
       register: tempfile
 
     - name: Download install script
+      tags: snoopy
+      become: true
       get_url: 
         url: https://github.com/a2o/snoopy/raw/install/install/install-snoopy.sh
         dest: "{{ tempfile.path }}"
@@ -17,10 +23,14 @@
         mode: 0700
 
     - name: Run install script
+      tags: snoopy
+      become: true
       shell:
         cmd: '"{{ tempfile.path }}" stable'
     
     - name: Remove temporary file
+      tags: snoopy
+      become: true
       file:
         path: "{{ tempfile.path }}"
         state: absent
